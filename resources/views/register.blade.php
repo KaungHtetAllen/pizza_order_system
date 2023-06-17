@@ -4,9 +4,8 @@
 
 @section('content')
 <div class="login-form">
-    <form action="{{ route('register')}}" method="post">
+    <form action="{{ route('register')}}" method="POST">
         @csrf
-
         @error("term")
         <small class="text-danger">{{ $message }}</small>
         @enderror

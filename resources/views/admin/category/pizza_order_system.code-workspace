@@ -1,0 +1,17 @@
+{
+  "folders": [
+	{
+		"path": "../../../.."
+	},
+	{
+		"path": "../../../../../Admin_dashboard"
+	},
+	{
+		"path": "../../../../../Customer_Panel"
+	},
+	{
+		"path": "../../../../../Original_Admin_dashboard"
+	}
+],
+  "settings": {}
+}
