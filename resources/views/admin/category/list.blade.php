@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="table-data__tool-right">
-                        <a href="category.html">
+                        <a href="{{ route('category#createPage')}}">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>Add Category
                             </button>
@@ -37,14 +37,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($categories as $category)
                             <tr class="tr-shadow">
-                                <td>1</td>
-                                <td>Lori Lynch</td>
-                                <td>2018-09-27 02:12</td>
+                                <td>{{ $category->category_id }}</td>
+                                <td>{{ $category->category_name}}</td>
+                                <td>{{ $category->created_at->format('d-M-Y')}}</td>
                                 <td>
-                                    CRUD
+                                    <div class="table-data-feature">
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                            <i class="zmdi zmdi-mail-send"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                            <i class="zmdi zmdi-more"></i>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -19,6 +19,9 @@ Route::middleware([
     //for admin
     Route::group(['prefix' => 'category','middleware'=> 'admin_auth'], function () {
         Route::get('list', [CategoryController::class, 'list'])->name("category#list");
+        Route::get('create/page', [CategoryController::class, 'createPage'])->name("category#createPage");
+        Route::post('create', [CategoryController::class, 'create'])->name("category#create");
+
     });
 
     //for user
