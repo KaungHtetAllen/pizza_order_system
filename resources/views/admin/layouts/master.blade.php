@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>@yield('title')</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ asset('admin/css/font-face.css')}}" rel="stylesheet" media="all">
@@ -31,7 +31,10 @@
     <link href="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-<link href="{{ asset('admin/css/theme.css')}}" rel="stylesheet" media="all">
+    <link href="{{asset('admin/css/theme.css')}}" rel="stylesheet" media="all">
+
+    {{-- Font awesome link --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -41,7 +44,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                    <img src="{{ asset('admin/images/icon/logo.png')}}" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -53,8 +56,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="category.html">
-                                <i class="fas fa-chart-bar"></i>Category</a>
+                            <a href="{{ route('category#list')}}">
+                                <i class="fa-solid fa-list"></i>Category</a>
                         </li>
                         <li>
                             <a href="customerList.html">
@@ -73,13 +76,9 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                @csrf
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                                <button class="au-btn--submit" type="submit">
-                                    <i class="zmdi zmdi-search"></i>
-                                </button>
-                            </form>
+                            <span class="form-header">
+                                <h3>Admin Dashboard Panel</h3>
+                            </span>
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
@@ -125,23 +124,23 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">Sithu</a>
+                                            <a class="js-acc-btn" href="#">{{ Auth::user()->name}}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">sithu</a>
+                                                        <a href="#">{{ Auth::user()->name}}</a>
                                                     </h5>
-                                                    <span class="email">sithu@example.com</span>
+                                                    <span class="email">{{ Auth::user()->email}}</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -150,9 +149,11 @@
                                                         <i class="zmdi zmdi-account"></i>Account</a>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <div class="account-dropdown__footer my-3">
+                                                <form action="{{ route('logout')}}" class="d-flex justify-content-center" method="POST">
+                                                    @csrf
+                                                    <button class="btn bg-dark text-white col-10" type="submit">Logout</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -194,7 +195,7 @@
     </script>
 
     <!-- Main JS-->
-    <script src="{{ asset('admin/js/main.js')}}"></script>
+    <script src="{{asset('admin/js/main.js')}}"></script>
 
 </body>
 
