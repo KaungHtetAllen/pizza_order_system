@@ -21,6 +21,7 @@ Route::middleware([
         Route::get('list', [CategoryController::class, 'list'])->name("category#list");
         Route::get('create/page', [CategoryController::class, 'createPage'])->name("category#createPage");
         Route::post('create', [CategoryController::class, 'create'])->name("category#create");
+        Route::get('delete/{id}', [CategoryController::class, 'delete'])->name('category#delete');
 
     });
 

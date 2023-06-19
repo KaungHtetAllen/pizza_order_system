@@ -27,6 +27,49 @@
                         </button>
                     </div>
                 </div>
+                @if(session("createSuccess"))
+                <div class="col-4 offset-8 alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-thumbs-up mr-1"></i> {{ session('createSuccess')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endif
+
+                @if(session("deleteSuccess"))
+                <div class="col-4 offset-8 alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-thumbs-up mr-1"></i>{{ session('deleteSuccess')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endif
+
+
+                <div class="row">
+                    <div class="col-4">
+                        <h4 class="text-secondary"> Search Key : <span style="text-decoration: underline"class="text-danger">{{ request('key') }}</span></h4>
+                    </div>
+                    <div class="col-3 offset-5">
+                        <form action="{{ route('category#list')}}" method="get">
+                            @csrf
+                            <div class="d-flex">
+                                <input type="text" name="key" class="form-control" value="{{ request('key')}}"placeholder="Search...">
+                                <button type="submit" class="btn bg-dark text-center">
+                                    <i class="fa-solid fa-magnifying-glass text-white"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row my-2 p-3">
+                    <div  style="border-radius: 10px" class="col-3 bg-secondary py-2 text-center text-capitalize text-bold">
+                        <h3 style="color: rgb(255, 255, 255)">Total : ({{ $categories->total()}})</h3>
+                    </div>
+                </div>
+
+                @if (count($categories) != 0)
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <thead>
@@ -50,9 +93,11 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
+                                        <a href="{{ route('category#delete',$category->category_id)}}">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </a>
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                             <i class="zmdi zmdi-more"></i>
                                         </button>
@@ -62,7 +107,15 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    <div class="mt-3">
+                        {{ $categories->links()}}
+                    </div>
                 </div>
+                @else
+                <h3 class="text-secondary text-center mt-5">There is No Categories!</h3>
+                @endif
+
                 <!-- END DATA TABLE -->
             </div>
         </div>
