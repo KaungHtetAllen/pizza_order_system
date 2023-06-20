@@ -82,7 +82,7 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr class="tr-shadow">
-                                <td>{{ $category->category_id }}</td>
+                                <td>{{ $category->id }}</td>
                                 <td>{{ $category->category_name}}</td>
                                 <td>{{ $category->created_at->format('d-M-Y')}}</td>
                                 <td>
@@ -90,10 +90,12 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                             <i class="zmdi zmdi-mail-send"></i>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <a href="{{ route('category#delete',$category->category_id)}}">
+                                        <a href="{{ route('category#edit', $category->id)}}">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                        </a>
+                                        <a href="{{ route('category#delete',$category->id)}}">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
