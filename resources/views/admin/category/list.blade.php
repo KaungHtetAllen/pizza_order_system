@@ -44,6 +44,14 @@
                   </button>
                 </div>
                 @endif
+                @if(session("passwordChangeSuccess"))
+                <div class="col-5 offset-7 alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa-solid fa-thumbs-up mr-1"></i>{{ session('passwordChangeSuccess')}}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                @endif
 
 
                 <div class="row">

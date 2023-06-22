@@ -4,6 +4,10 @@
 
 @section('content')
 <div class="login-form">
+
+     @error('terms')
+    <p class="text-danger"> {{ $message }}</p>
+    @enderror
     <form action="{{ route('login')}}" method="post">
         @csrf
         <div class="form-group">
