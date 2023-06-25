@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="login-form">
-
      @error('terms')
     <p class="text-danger"> {{ $message }}</p>
     @enderror

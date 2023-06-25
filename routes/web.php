@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +31,13 @@ Route::middleware([
 
         //admin account
         Route::prefix('admin')->group(function () {
+
+            //password
             Route::get('password/changePage', [AuthController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
             Route::post('changePassword', [AuthController::class, 'changePassword'])->name('admin#changePassword');
+
+            //profile
+            Route::get('details',[AdminController::class,'details'])->name('admin#details');
         });
     });
 
@@ -45,8 +51,8 @@ Route::middleware([
 });
 
 Route::redirect('/', 'loginPage');
-Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginPage');
-Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
+Route::get('loginPage', [AdminController::class, 'loginPage'])->name('auth#loginPage');
+Route::get('registerPage', [AdminController::class, 'registerPage'])->name('auth#registerPage');
 // Route::post('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 
 
