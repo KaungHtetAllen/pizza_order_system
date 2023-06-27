@@ -33,11 +33,12 @@ Route::middleware([
         Route::prefix('admin')->group(function () {
 
             //password
-            Route::get('password/changePage', [AuthController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
-            Route::post('changePassword', [AuthController::class, 'changePassword'])->name('admin#changePassword');
+            Route::get('password/changePage', [AdminController::class, 'changePasswordPage'])->name('admin#changePasswordPage');
+            Route::post('changePassword', [AdminController::class, 'changePassword'])->name('admin#changePassword');
 
             //profile
             Route::get('details',[AdminController::class,'details'])->name('admin#details');
+            Route::get('edit',[AdminController::class,'edit'])->name('admin#edit');
         });
     });
 
@@ -51,8 +52,8 @@ Route::middleware([
 });
 
 Route::redirect('/', 'loginPage');
-Route::get('loginPage', [AdminController::class, 'loginPage'])->name('auth#loginPage');
-Route::get('registerPage', [AdminController::class, 'registerPage'])->name('auth#registerPage');
+Route::get('loginPage', [AuthController::class, 'loginPage'])->name('auth#loginPage');
+Route::get('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 // Route::post('registerPage', [AuthController::class, 'registerPage'])->name('auth#registerPage');
 
 

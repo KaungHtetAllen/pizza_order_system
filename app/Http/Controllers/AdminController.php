@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -39,6 +40,12 @@ class AdminController extends Controller
      //direct admin details page
      public function details(){
         return view('admin.account.details');
+     }
+
+
+     //direct admin profile page
+     public function edit(){
+        return view('admin.account.edit');
      }
 
 

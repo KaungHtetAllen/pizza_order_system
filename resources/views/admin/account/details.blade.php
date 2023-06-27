@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title','Category List Page')
+@section('title','Account Info Page')
 
 @section('content')
 {{-- Main content --}}
@@ -39,9 +39,11 @@
                         </div>
                         <div class="row">
                             <div class="col-3 offset-2 mt-4 text-center">
-                                <button class="btn btn-dark text-white">
-                                    <i class="fa-solid fa-pen-to-square mr-2"></i> Edit Profile
-                                </button>
+                                <a href="{{ route('admin#edit')}}">
+                                    <button class="btn btn-dark text-white">
+                                        <i class="fa-solid fa-pen-to-square mr-2"></i> Edit Profile
+                                    </button>
+                                </a>
                             </div>
                         </div>
 
