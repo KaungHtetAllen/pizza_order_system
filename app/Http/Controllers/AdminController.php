@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -49,12 +50,60 @@ class AdminController extends Controller
      }
 
 
+     //update account
+     public function update($id,Request $request){
+        $this->accountValidationCheck($request);
+        $data = $this->getUserData($request);
+
+        if($request->hasFile('image')){
+            $dbImage = User::where('id', $id)->first()->image;
+
+            if($dbImage != null){
+                Storage::delete('public/' . $dbImage);
+            }
+            }
+
+        $fileName = uniqid() . $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public', $fileName);
+
+
+        $data['image'] = $fileName;
+
+        User::where('id', $id)->update($data);
+        return redirect()->route("admin#details")->with(['updateSuccess'=>'Admin account Updated']);
+     }
+
     //password validation
     private function passwordValidationCheck($request){
         Validator::make($request->all(), [
             'oldPassword' => 'required | min:6',
             'newPassword' => 'required | min:6',
             'confirmPassword' => 'required | min:6 | same:newPassword'
+        ])->validate();
+    }
+
+
+    //request user data
+    private function getUserData($request){
+        return [
+            'name' => $request->name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'phone' => $request->phone
+        ];
+    }
+
+
+    //account validation check
+    private function accountValidationCheck($request){
+         Validator::make($request->all(), [
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
+            'gender'=>'required',
+            'image' =>'required'
         ])->validate();
     }
 }
