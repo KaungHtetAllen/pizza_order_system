@@ -51,17 +51,13 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-tachometer-alt"></i>Home Page
+                            <a class="js-arrow" href="{{ route('category#list')}}">
+                                <i class="fa-solid fa-list"></i>Cateory
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('category#list')}}">
-                                <i class="fa-solid fa-list"></i>Category</a>
-                        </li>
-                        <li>
-                            <a href="customerList.html">
-                                <i class="fas fa-chart-bar"></i>Customers</a>
+                            <a href="{{ route('product#list')}}">
+                            <i class="fa-solid fa-pizza-slice"></i>Products</a>
                         </li>
                     </ul>
                 </nav>

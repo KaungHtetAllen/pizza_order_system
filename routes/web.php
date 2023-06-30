@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware([
@@ -41,6 +42,15 @@ Route::middleware([
             Route::get('edit',[AdminController::class,'edit'])->name('admin#edit');
             Route::post('update/{id}',[AdminController::class,'update'])->name('admin#update');
         });
+
+
+        //products Page
+        Route::prefix('products')->group(function () {
+            Route::get('list', [ProductController::class, 'list'])->name("product#list");
+            Route::get('createPage', [ProductController::class, 'createPage'])->name("product#createPage");
+            Route::post('create', [ProductController::class, 'create'])->name('product#create');
+        });
+
     });
 
 

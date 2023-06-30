@@ -37,7 +37,7 @@
 
                                 <div class="col-5 offset-1">
                                     <div class="form-group">
-                                        <input type="file" name="image" id="" class="form-control">
+                                        <input type="file" name="image" id="" class="form-control @error('image') is-invalid @enderror">
                                          @error('image')
                                         <div class="invalid-feedback">
                                             {{ $message}}
