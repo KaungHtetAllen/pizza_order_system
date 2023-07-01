@@ -11,7 +11,13 @@ class ProductController extends Controller
 {
     //
     public function list(){
-        $pizzas = Product::orderBy('created_at','asc')->paginate(5);
+        $pizzas = Product::when(request('key'), function ($query) {
+                    $query->where('name', 'like', '%' . request('key') . '%');
+                })
+                ->orderBy('created_at','asc')
+                ->paginate(3);
+
+        $pizzas->appends(request()->all());
         return view('admin.products.pizzaList',compact('pizzas'));
     }
 
@@ -54,6 +60,18 @@ class ProductController extends Controller
         ])->validate();
     }
 
+
+    //delete pizza
+    public function delete($id){
+        Product::where('id', $id)->delete();
+        return redirect()->route('product#list')->with(['deleteSuccess' => 'Product Deleted!']);
+    }
+
+    //edit pizza page
+    public function edit($id){
+        $pizza = Product::where('id', $id)->first();
+        return view('admin.products.edit',compact('pizza'));
+    }
 
     //data
     private function requestProductInfo($request){
